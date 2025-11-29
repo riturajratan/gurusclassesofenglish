@@ -1,0 +1,11 @@
+# Robots.txt for Gurus Classes of English
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://gurusclassesofenglish.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 10
