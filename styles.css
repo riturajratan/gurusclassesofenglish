@@ -263,7 +263,7 @@ main {
 }
 
 .author-bio {
-    margin-bottom: 3rem;
+    margin-bottom: 0;
 }
 
 .author-bio p {
@@ -272,28 +272,6 @@ main {
     line-height: 1.9;
     margin-bottom: 1.5rem;
     text-align: left;
-}
-
-.author-quote {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 2.5rem;
-    border-radius: 12px;
-    margin-top: 2rem;
-}
-
-.author-quote p {
-    color: #ffffff;
-    font-size: 1.4rem;
-    font-style: italic;
-    margin-bottom: 0.5rem;
-    font-family: 'Merriweather', serif;
-}
-
-.quote-translation {
-    font-size: 1.1rem !important;
-    color: #e2e8f0 !important;
-    font-style: normal !important;
-    font-family: 'Inter', sans-serif !important;
 }
 
 /* ===========================
@@ -367,10 +345,17 @@ main {
 }
 
 .footer-tagline {
-    font-size: 1.3rem;
-    color: #cbd5e0;
+    font-size: 1.4rem;
+    color: #ffd700;
     font-style: italic;
     font-family: 'Merriweather', serif;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline-translation {
+    font-size: 1.1rem;
+    color: #cbd5e0;
+    font-style: italic;
 }
 
 /* ===========================
