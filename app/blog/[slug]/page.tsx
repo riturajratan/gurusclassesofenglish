@@ -7,6 +7,7 @@ import { absolute, jsonLd, site } from '@/lib/site';
 import LessonBody from '@/components/LessonBody';
 import LessonCard from '@/components/LessonCard';
 import ShareLesson from '@/components/ShareLesson';
+import ReadingControls from '@/components/ReadingControls';
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -76,6 +77,7 @@ export default async function LessonPage({ params }: Props) {
               </time>
             </div>
           </header>
+          <ReadingControls />
           {post.sample && (
             <p className="sample-notice">
               Sample lesson · This example shows how the notebook will look. New lessons published

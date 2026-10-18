@@ -11,153 +11,85 @@ export default function Home() {
   const latest = lessons.find((item) => !item.sample) || lessons[0];
   return (
     <>
-      <section className="hero shell">
-        <div className="hero-copy">
-          <p className="eyebrow">
-            <span className="tiny-star">✳</span> YOUR EVERYDAY ENGLISH COMPANION
-          </p>
-          <h1>
-            Small lessons.
-            <br />A world of
-            <br />
-            <em>possibilities.</em>
-          </h1>
-          <p className="hero-description">
-            A new word. A clearer sentence. A little more confidence. Discover the joy of learning
-            English, one lesson at a time.
+      <section className="education-hero shell">
+        <div className="education-intro">
+          <p className="eyebrow">GURUS CLASSES OF ENGLISH</p>
+          <h1>English made clearer.<br /><em>One lesson at a time.</em></h1>
+          <p className="education-lead">
+            Understand a new word. Make sense of a grammar rule. Learn to express yourself
+            with clear, practical English lessons from S.D. Singh Ratan.
           </p>
           <div className="hero-actions">
-            <Link className="button" href="/blog/">
-              Open the notebook <span>↗</span>
-            </Link>
-            <Link className="quiet-link" href="/about/">
-              Meet S.D. Singh Ratan <span>→</span>
-            </Link>
+            <Link className="button" href="/blog/">Browse lessons <span aria-hidden="true">→</span></Link>
+            <Link className="quiet-link" href="/about/">Meet your teacher <span aria-hidden="true">↗</span></Link>
           </div>
-          <div className="hero-footnote">
-            <span className="mini-book">Aa</span>
-            <span>
-              For curious minds.
-              <br />
-              <strong>At every stage of learning.</strong>
-            </span>
-          </div>
+          <p className="education-note">Read at your pace. Revisit anytime. Share what you learn.</p>
         </div>
-        <div className="hero-feature">
-          <div className="feature-sticker">
-            <span>One little lesson.</span>
-            <strong>
-              Something
-              <br />
-              to take with you.
-            </strong>
-            <span className="sticker-star">✳</span>
-          </div>
-          <Link href={`/blog/${latest.slug}/`} className="featured-notebook">
-            {latest.image ? (
-              <img
-                src={latest.image}
-                width="720"
-                height="540"
-                alt={latest.imageAlt || latest.title}
-                fetchPriority="high"
-              />
-            ) : (
-              <LessonArt kind={latest.category} />
-            )}
-            <div className="notebook-copy">
-              <div className="card-meta">
-                <span>{latest.sample ? 'FROM THE SAMPLE NOTEBOOK' : 'LATEST LESSON'}</span>
-                <span>{latest.category}</span>
-              </div>
-              <h2>{latest.title}</h2>
-              <span className="text-link">Explore this lesson ↗</span>
-            </div>
-          </Link>
-          <span className="handwritten">A little practice goes a long way.</span>
-        </div>
+        <figure className="education-teacher">
+          <AuthorPhoto />
+          <figcaption>
+            <span className="teacher-label">YOUR ENGLISH TEACHER</span>
+            <strong>S.D. Singh Ratan</strong>
+            <span>A love for language. A life of teaching.</span>
+          </figcaption>
+        </figure>
       </section>
-      <div className="topic-ribbon">
-        <div className="shell">
-          <span>WORDS THAT STAY WITH YOU</span>
-          <span>✳</span>
-          <span>GRAMMAR THAT MAKES SENSE</span>
-          <span>✳</span>
-          <span>CONFIDENCE THAT GROWS</span>
+
+      <section className="education-topics shell" aria-labelledby="topics-heading">
+        <div className="compact-heading">
+          <h2 id="topics-heading">What would you like to learn?</h2>
+          <span>Choose a topic to get started</span>
         </div>
-      </div>
-      <section className="section shell" id="lessons">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">A FRESH PAGE, A NEW DISCOVERY</p>
-            <h2>
-              From the notebook<span className="coral-dot">.</span>
-            </h2>
-          </div>
-          <Link className="quiet-link" href="/blog/">
-            View all lessons <span>↗</span>
-          </Link>
-        </div>
-        <div className="lesson-grid">
-          {lessons.slice(0, 3).map((lesson) => (
-            <LessonCard key={lesson.slug} lesson={lesson} />
-          ))}
-        </div>
-      </section>
-      <section className="teacher-section">
-        <div className="shell teacher-grid">
-          <div className="teacher-visual">
-            <span className="eyebrow">THE HEART BEHIND THE LESSONS</span>
-            <AuthorPhoto />
-            <span className="teacher-signature">S.D. Singh Ratan</span>
-            <div className="teacher-seal">
-              A LOVE FOR
-              <br />
-              <strong>LANGUAGE</strong>
-              <br />A LIFE OF LEARNING
-            </div>
-          </div>
-          <div className="teacher-copy">
-            <p className="eyebrow">MEET YOUR TEACHER</p>
-            <h2>
-              Good teaching
-              <br />
-              stays with you.
-            </h2>
-            <p>
-              At the heart of Gurus Classes of English is S.D. Singh Ratan’s love for language and
-              teaching. This notebook brings English lessons together in one place, ready to revisit
-              and share.
-            </p>
-            <p>Come for a word. Stay for the understanding.</p>
-            <Link className="text-link" href="/about/">
-              More about your teacher ↗
-            </Link>
-          </div>
-        </div>
-      </section>
-      <section className="section shell explore-section">
-        <p className="eyebrow">FOLLOW YOUR CURIOSITY</p>
-        <h2>What will you learn today?</h2>
         <div className="topic-grid">
           {[
-            ['Vocabulary', '01', 'Find just the right word.'],
-            ['Grammar', '02', 'Make the rules make sense.'],
-            ['Common Mistakes', '03', 'Clear up the little confusions.'],
-            ['Writing', '04', 'Give your thoughts a voice.'],
-          ].map(([name, number, description]) => (
-            <Link
-              key={name}
-              href={`/blog/?topic=${encodeURIComponent(name)}`}
-              className="topic-card"
-            >
-              <span className="topic-number">{number}</span>
-              <h3>{name}</h3>
-              <p>{description}</p>
-              <span className="topic-arrow">↗</span>
+            ['Vocabulary', 'Aa', 'Useful words, clearly explained.'],
+            ['Grammar', 'Gg', 'Understand how English works.'],
+            ['Common Mistakes', '✓', 'Clear up everyday confusions.'],
+            ['Writing', '✎', 'Put your thoughts into words.'],
+          ].map(([name, icon, description]) => (
+            <Link key={name} href={`/blog/?topic=${encodeURIComponent(name)}`} className="education-topic">
+              <span className="subject-icon" aria-hidden="true">{icon}</span>
+              <span><strong>{name}</strong><span>{description}</span></span>
+              <span className="subject-arrow" aria-hidden="true">→</span>
             </Link>
           ))}
         </div>
+      </section>
+
+      <section className="section shell" aria-labelledby="featured-heading">
+        <div className="section-heading">
+          <div><p className="eyebrow">A LITTLE PRACTICE, EVERY DAY</p><h2 id="featured-heading">Start with a lesson</h2></div>
+          <Link className="quiet-link" href="/blog/">All lessons <span aria-hidden="true">→</span></Link>
+        </div>
+        <article className="education-feature">
+          <Link href={`/blog/${latest.slug}/`} className="education-feature-image" aria-label={`Read ${latest.title}`}>
+            {latest.image ? <img src={latest.image} width="720" height="540" alt={latest.imageAlt || latest.title} /> : <LessonArt kind={latest.category} />}
+          </Link>
+          <div className="education-feature-copy">
+            <div className="card-meta"><span>{latest.category}</span><span>{latest.sample ? 'Sample lesson' : 'Latest lesson'}</span></div>
+            <h3><Link href={`/blog/${latest.slug}/`}>{latest.title}</Link></h3>
+            <p>{latest.excerpt}</p>
+            <Link className="button" href={`/blog/${latest.slug}/`}>Read this lesson <span aria-hidden="true">→</span></Link>
+          </div>
+        </article>
+      </section>
+
+      <section className="education-library" aria-labelledby="library-heading">
+        <div className="section shell">
+          <div className="section-heading">
+            <div><p className="eyebrow">KEEP LEARNING</p><h2 id="library-heading">More to explore</h2></div>
+            <p className="section-description">Small lessons you can return to, whenever you need them.</p>
+          </div>
+          <div className="lesson-grid">
+            {lessons.filter((lesson) => lesson.slug !== latest.slug).slice(0, 3).map((lesson) => <LessonCard key={lesson.slug} lesson={lesson} />)}
+          </div>
+          <div className="library-action"><Link className="button button-outline" href="/blog/">Explore all lessons <span aria-hidden="true">→</span></Link></div>
+        </div>
+      </section>
+
+      <section className="education-invitation shell">
+        <div><p className="eyebrow">LEARNING BEGINS WITH CURIOSITY</p><h2>A question about English?</h2><p>Get in touch with Gurus Classes of English.</p></div>
+        <Link className="button" href="/contact/">Get in touch <span aria-hidden="true">→</span></Link>
       </section>
       <script
         type="application/ld+json"

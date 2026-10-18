@@ -31,7 +31,7 @@ export default function LessonArchive({ lessons }: { lessons: Lesson[] }) {
   return (
     <>
       <label htmlFor="lesson-search" className="field-label">
-        Find a word, a question, a little clarity.
+        Search by word or lesson topic
       </label>
       <input
         id="lesson-search"

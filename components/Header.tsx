@@ -6,9 +6,9 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const links = [
-    { href: '/blog/', label: 'The lessons' },
-    { href: '/about/', label: 'Meet your teacher' },
-    { href: '/contact/', label: 'Get in touch' },
+    { href: '/blog/', label: 'Lessons' },
+    { href: '/about/', label: 'About the teacher' },
+    { href: '/contact/', label: 'Contact' },
   ];
   return (
     <header className="site-header">
@@ -45,7 +45,7 @@ export default function Header() {
             </Link>
           ))}
           <Link className="button button-small" href="/blog/" onClick={() => setOpen(false)}>
-            Learn something new <span aria-hidden="true">↗</span>
+            Start learning <span aria-hidden="true">→</span>
           </Link>
         </nav>
       </div>
