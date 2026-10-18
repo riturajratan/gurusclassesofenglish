@@ -21,7 +21,6 @@ export default function Footer() {
             <a href={site.facebook} target="_blank" rel="noopener noreferrer">
               Find us on Facebook ↗
             </a>
-            <Link href="/publish/">Teacher’s desk ↗</Link>
           </div>
         </div>
         <div className="footer-bottom">
