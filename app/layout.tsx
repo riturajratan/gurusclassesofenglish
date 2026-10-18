@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import './learning.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ServiceWorker from '@/components/ServiceWorker';

@@ -7,8 +7,8 @@ export default function Header() {
   const pathname = usePathname();
   const links = [
     { href: '/blog/', label: 'Lessons' },
-    { href: '/about/', label: 'About the teacher' },
-    { href: '/contact/', label: 'Contact' },
+    { href: '/about/', label: 'Meet your teacher' },
+    { href: '/contact/', label: 'Say hello' },
   ];
   return (
     <header className="site-header">
@@ -45,7 +45,7 @@ export default function Header() {
             </Link>
           ))}
           <Link className="button button-small" href="/blog/" onClick={() => setOpen(false)}>
-            Start learning <span aria-hidden="true">→</span>
+            Let’s learn <span aria-hidden="true">→</span>
           </Link>
         </nav>
       </div>

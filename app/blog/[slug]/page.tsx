@@ -8,6 +8,8 @@ import LessonBody from '@/components/LessonBody';
 import LessonCard from '@/components/LessonCard';
 import ShareLesson from '@/components/ShareLesson';
 import ReadingControls from '@/components/ReadingControls';
+import LessonPractice from '@/components/LessonPractice';
+import { recallFromLesson } from '@/lib/learning';
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -57,7 +59,7 @@ export default async function LessonPage({ params }: Props) {
       <div className="shell">
         <article className="lesson-article" data-lesson-id={post.slug}>
           <Link className="back-link" href="/blog/">
-            ← Back to the notebook
+            ← Back to all lessons
           </Link>
           <header className="article-heading">
             <p className="eyebrow">{post.category}</p>
@@ -94,12 +96,18 @@ export default async function LessonPage({ params }: Props) {
             />
           )}
           <LessonBody content={post.content} />
+          <LessonPractice slug={post.slug} recall={recallFromLesson(post.content)} />
           <div className="article-tags">
             {post.tags.map((tag) => (
               <span key={tag}>{tag}</span>
             ))}
           </div>
           <ShareLesson title={post.title} url={absolute(`/blog/${post.slug}/`)} />
+          <aside className="ask-teacher">
+            <AuthorPhoto small />
+            <div><strong>A little question? Ask your teacher.</strong><p>S.D. Singh Ratan is a call away. <a href={`tel:${site.telephone}`}>{site.phone}</a></p></div>
+            <Link className="text-link" href="/contact/">Get in touch <span aria-hidden="true">→</span></Link>
+          </aside>
         </article>
         <section className="section">
           <div className="section-heading">

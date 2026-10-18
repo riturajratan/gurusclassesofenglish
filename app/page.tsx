@@ -5,6 +5,7 @@ import { getLessons } from '@/lib/lessons';
 import LessonCard from '@/components/LessonCard';
 import LessonArt from '@/components/LessonArt';
 import { absolute, jsonLd, site } from '@/lib/site';
+import { BookOpen, Lightbulb, Heart } from 'lucide-react';
 export const metadata: Metadata = { alternates: { canonical: absolute('/') } };
 export default function Home() {
   const lessons = getLessons();
@@ -13,24 +14,24 @@ export default function Home() {
     <>
       <section className="education-hero shell">
         <div className="education-intro">
-          <p className="eyebrow">GURUS CLASSES OF ENGLISH</p>
-          <h1>English made clearer.<br /><em>One lesson at a time.</em></h1>
+          <p className="welcome-note"><span aria-hidden="true">☀</span> A little English, for every age.</p>
+          <h1>Come, learn a little.<br /><em>Grow a little.</em></h1>
           <p className="education-lead">
-            Understand a new word. Make sense of a grammar rule. Learn to express yourself
-            with clear, practical English lessons from S.D. Singh Ratan.
+            A new word, a clearer sentence, a lovely little discovery.
+            Join S.D. Singh Ratan and make English a happy part of your day.
           </p>
           <div className="hero-actions">
-            <Link className="button" href="/blog/">Browse lessons <span aria-hidden="true">→</span></Link>
+            <Link className="button" href="/blog/">Let’s learn something <span aria-hidden="true">→</span></Link>
             <Link className="quiet-link" href="/about/">Meet your teacher <span aria-hidden="true">↗</span></Link>
           </div>
-          <p className="education-note">Read at your pace. Revisit anytime. Share what you learn.</p>
+          <p className="education-note">No rush. No big words needed. Just a little curiosity.</p>
         </div>
         <figure className="education-teacher">
           <AuthorPhoto />
           <figcaption>
-            <span className="teacher-label">YOUR ENGLISH TEACHER</span>
+            <span className="teacher-label">A WARM HELLO FROM YOUR TEACHER</span>
             <strong>S.D. Singh Ratan</strong>
-            <span>A love for language. A life of teaching.</span>
+            <span>Here to make English a little easier.</span>
           </figcaption>
         </figure>
       </section>
@@ -58,7 +59,7 @@ export default function Home() {
 
       <section className="section shell" aria-labelledby="featured-heading">
         <div className="section-heading">
-          <div><p className="eyebrow">A LITTLE PRACTICE, EVERY DAY</p><h2 id="featured-heading">Start with a lesson</h2></div>
+          <div><p className="eyebrow">PICK UP A LITTLE SOMETHING TODAY</p><h2 id="featured-heading">Here’s a lovely place to start.</h2></div>
           <Link className="quiet-link" href="/blog/">All lessons <span aria-hidden="true">→</span></Link>
         </div>
         <article className="education-feature">
@@ -69,9 +70,16 @@ export default function Home() {
             <div className="card-meta"><span>{latest.category}</span><span>{latest.sample ? 'Sample lesson' : 'Latest lesson'}</span></div>
             <h3><Link href={`/blog/${latest.slug}/`}>{latest.title}</Link></h3>
             <p>{latest.excerpt}</p>
-            <Link className="button" href={`/blog/${latest.slug}/`}>Read this lesson <span aria-hidden="true">→</span></Link>
+            <Link className="button" href={`/blog/${latest.slug}/`}>Read &amp; give it a try <span aria-hidden="true">→</span></Link>
           </div>
         </article>
+      </section>
+
+      <section className="learning-path shell" aria-label="Learn at your own pace">
+        <div className="learning-path-intro"><p className="eyebrow">SMALL STEPS ARE GOOD STEPS</p><h2>Make it your own.</h2></div>
+        <div className="learning-step"><BookOpen size={25} aria-hidden="true" /><h3>Read a little</h3><p>Choose a lesson that catches your eye.</p></div>
+        <div className="learning-step"><Lightbulb size={25} aria-hidden="true" /><h3>Try a little</h3><p>Recall a meaning or write a sentence of your own.</p></div>
+        <div className="learning-step"><Heart size={25} aria-hidden="true" /><h3>Keep it with you</h3><p>Come back for a reminder. Share a little learning.</p></div>
       </section>
 
       <section className="education-library" aria-labelledby="library-heading">
@@ -88,8 +96,8 @@ export default function Home() {
       </section>
 
       <section className="education-invitation shell">
-        <div><p className="eyebrow">LEARNING BEGINS WITH CURIOSITY</p><h2>A question about English?</h2><p>Get in touch with Gurus Classes of English.</p></div>
-        <Link className="button" href="/contact/">Get in touch <span aria-hidden="true">→</span></Link>
+        <div><p className="eyebrow">A LITTLE HELP GOES A LONG WAY</p><h2>A question? Sir is a call away.</h2><p>You’re welcome to ask. Call <a href={`tel:${site.telephone}`}>{site.phone}</a> or say hello.</p></div>
+        <Link className="button" href="/contact/">Say hello <span aria-hidden="true">→</span></Link>
       </section>
       <script
         type="application/ld+json"
@@ -101,6 +109,8 @@ export default function Home() {
             url: site.url,
             logo: absolute('/logo.jpeg'),
             founder: { '@type': 'Person', name: site.author },
+            telephone: site.telephone,
+            ...(site.email ? { email: site.email } : {}),
             sameAs: [site.facebook],
           }),
         }}
