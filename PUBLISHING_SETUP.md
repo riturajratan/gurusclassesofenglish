@@ -113,3 +113,5 @@ Automated tests mock external services. They do not prove real account permissio
 These identifiers and endpoint are public configuration, not credentials.
 
 The `DRAFTS` KV binding was verified in the Worker settings. Rate limiter configuration was opened but not saved: Chrome blocked browser automation while an extension UI was open. Non-secret environment variables and private secrets remain to be configured. No secret values were entered.
+
+Resume update: `DRAFTS`, `LOGIN_LIMIT` (5 per 60 seconds, namespace 1001), and `API_LIMIT` (30 per 60 seconds, namespace 1002) were verified in the dashboard. `GITHUB_REPO`, `GITHUB_BRANCH`, `SITE_URL`, and `ALLOWED_ORIGINS` were saved and verified. The secret-entry form for `ADMIN_PASSWORD` was opened with Secret checked and the value left blank for the user. SESSION_SECRET, GITHUB_TOKEN, OPENAI_API_KEY and OPENAI_MODEL are still pending, as are frontend GitHub deployment and the real end-to-end check. A direct public health request could not be checked from the shell because DNS resolution failed in that environment.
