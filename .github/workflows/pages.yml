@@ -24,7 +24,7 @@ jobs:
       - run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://gurusclassesofenglish.com
-          NEXT_PUBLIC_PUBLISHER_URL: ${{ vars.NEXT_PUBLIC_PUBLISHER_URL }}
+          NEXT_PUBLIC_PUBLISHER_URL: ${{ vars.NEXT_PUBLIC_PUBLISHER_URL || 'https://gurus-notebook-publisher.riturajratan.workers.dev' }}
           NEXT_PUBLIC_GOOGLE_VERIFICATION: ${{ vars.NEXT_PUBLIC_GOOGLE_VERIFICATION }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
