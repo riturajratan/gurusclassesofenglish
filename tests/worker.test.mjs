@@ -159,11 +159,11 @@ test('a GitHub conflict preserves the draft and never force pushes', async () =>
 test('AI draft text is validated; invalid output falls back to manual entry without losing the image', async () => {
   const env = environment();
   env.OPENAI_API_KEY = 'test-key';
-  env.OPENAI_MODEL = 'gpt-5.6-terra';
+  env.OPENAI_MODEL = 'gpt-5.6-luna';
   const token = await createSession(secret);
   const original = globalThis.fetch;
   try {
-    for (const output of [JSON.stringify(fields), '{not valid json}']) {
+    for (const output of ['{not valid json}', JSON.stringify(fields)]) {
       globalThis.fetch = async (url, options) => {
         assert.equal(url, 'https://api.openai.com/v1/responses');
         const body = JSON.parse(options.body);
@@ -182,10 +182,34 @@ test('AI draft text is validated; invalid output falls back to manual entry with
     globalThis.fetch = original;
   }
 });
+test('the same image reuses its successful AI result without another paid request', async () => {
+  const env = environment();
+  env.OPENAI_API_KEY = 'test-key';
+  env.OPENAI_MODEL = 'gpt-5.6-luna';
+  const token = await createSession(secret);
+  const original = globalThis.fetch;
+  let calls = 0;
+  try {
+    globalThis.fetch = async (_url, options) => {
+      calls++;
+      const body = JSON.parse(options.body);
+      assert.equal(body.model, 'gpt-5.6-luna');
+      assert.equal(body.max_output_tokens, 2500);
+      return Response.json({ output: [{ content: [{ type: 'output_text', text: JSON.stringify(fields) }] }] });
+    };
+    const first = await (await request('/draft', env, { token, body: { image } })).json();
+    const second = await (await request('/draft', env, { token, body: { image } })).json();
+    assert.equal(calls, 1);
+    assert.equal(second.generated, true);
+    assert.deepEqual(second.fields, first.fields);
+    assert.notEqual(second.id, first.id);
+    assert.equal((await env.DRAFTS.get('draft:' + second.id, 'json')).image, image);
+  } finally { globalThis.fetch = original; }
+});
 test('AI failures give safe account guidance and preserve the image', async () => {
   const env = environment();
   env.OPENAI_API_KEY = 'test-key';
-  env.OPENAI_MODEL = 'gpt-5.6-terra';
+  env.OPENAI_MODEL = 'gpt-5.6-luna';
   const token = await createSession(secret);
   const original = globalThis.fetch;
   try {

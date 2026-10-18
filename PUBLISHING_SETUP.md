@@ -131,3 +131,9 @@ First real publication verified: the user published “Pay Off: Meaning and Exam
 
 
 The teacher desk now starts preparation automatically after choosing a file or receiving an Android-shared image. Successful preparation fills every field; the teacher checks category, reviews, and publishes. Manual retry remains available after failure. The editor waits until preparation finishes so late AI results cannot overwrite typing. Existing saved drafts are restored without another automatic request.
+
+
+
+Automatic-fill deployment `e205582` verified live. After the user resolved API account availability, choosing the supplied image automatically generated the title and full draft without a Prepare button. The generated test draft was not published again.
+
+Cost and simplicity update: use `gpt-5.6-luna` with reasoning disabled and a 2,500 output-token ceiling. A SHA-256 cache reuses successful preparation of the same image/model for 24 hours; failed results are not cached. No automatic premium-model fallback or automatic retry is configured. Editing category/title, review, and publication use no OpenAI call. Eleven Worker tests, TypeScript and production static build pass. The editor now shows title and category only, with lesson text and search details in a collapsed optional section; preparation failure opens it for manual recovery.

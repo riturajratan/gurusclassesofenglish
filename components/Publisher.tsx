@@ -100,6 +100,7 @@ export default function Publisher() {
   const fileInput = useRef<HTMLInputElement>(null);
   const actionLock = useRef(false);
   const [autoPreparePending, setAutoPreparePending] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const api = useCallback(
     async (path: string, body?: unknown) => {
       if (!navigator.onLine)
@@ -145,6 +146,7 @@ export default function Publisher() {
       setDraftId('');
       setReceipt(null);
       setReview(false);
+      setShowDetails(false);
       setAutoPreparePending(true);
     } catch (e) {
       setError((e as Error).message);
@@ -160,6 +162,7 @@ export default function Publisher() {
       if (draft?.id && draft?.fields) {
         setDraftId(draft.id);
         setFields({ ...empty, ...draft.fields });
+        setShowDetails(!draft.fields.content);
         setMessage(
           'Your last draft is restored. The image is saved privately by the publisher for 24 hours.',
         );
@@ -293,6 +296,7 @@ export default function Publisher() {
         const result = await api('/draft', { image });
         setDraftId(result.id);
         if (result.fields) setFields(result.fields);
+        setShowDetails(!result.fields);
         setMessage(result.message);
       } else {
         setFields({ ...empty });
@@ -585,8 +589,9 @@ export default function Publisher() {
                 <form onSubmit={preview}>
                   <h2>Check your lesson.</h2>
                   <p className="desk-help">
-                    Check the category and the text against your image. The other details are ready;
-                    you can edit anything before publishing.
+                    {fields.content
+                      ? 'Your lesson and search details are filled in. Change the title or category if needed, then review and publish.'
+                      : 'Automatic filling did not finish. Retry, or add the lesson text in the details below.'}
                   </p>
                   <label htmlFor="post-title" className="field-label">
                     Lesson title
@@ -600,7 +605,7 @@ export default function Publisher() {
                     maxLength={160}
                   />
                   <label htmlFor="post-category" className="field-label">
-                    Topic
+                    Category
                   </label>
                   <select
                     id="post-category"
@@ -612,6 +617,9 @@ export default function Publisher() {
                       <option key={category}>{category}</option>
                     ))}
                   </select>
+                  <details className="seo-details" open={showDetails}
+                    onToggle={(event) => setShowDetails(event.currentTarget.open)}>
+                    <summary>Lesson text &amp; SEO details · Edit if needed</summary>
                   <label htmlFor="post-content" className="field-label">
                     Lesson text
                   </label>
@@ -635,10 +643,6 @@ export default function Publisher() {
                     onChange={(e) => update('excerpt', e.target.value)}
                     maxLength={240}
                   />
-                  <details className="seo-details">
-                    <summary>
-                      Search & image details · Prepared automatically when connected
-                    </summary>
                     <label className="field-label" htmlFor="seo-title">
                       Search title
                     </label>
@@ -683,7 +687,7 @@ export default function Publisher() {
                     />
                   </details>
                   <div className="desk-actions">
-                    <button className="button" disabled={!!busy}>
+                    <button className="button" disabled={!!busy || !fields.content.trim()}>
                       Review my lesson →
                     </button>
                     <button
