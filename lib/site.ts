@@ -3,7 +3,7 @@ export const site = {
   author: 'S.D. Singh Ratan',
   phone: '9829112945',
   telephone: '+919829112945',
-  email: '',
+  email: 'gurusclassesofenglish@gmail.com',
   url: (process.env.NEXT_PUBLIC_SITE_URL || 'https://gurusclassesofenglish.com').replace(
     /\/$/,
     '',
