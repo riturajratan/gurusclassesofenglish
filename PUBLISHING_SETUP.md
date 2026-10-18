@@ -101,3 +101,15 @@ A failed or racing Git commit leaves the draft intact. Image and JSON are writte
 ## Verification limits for this handoff
 
 Automated tests mock external services. They do not prove real account permissions, Cloudflare deployment, OpenAI billing, DNS, Google indexing or Android Gallery sharing. Those require the connected-account and phone checks above.
+
+## Cloudflare resource progress
+
+- Account: `72dbaa9606b6dd363b5a50e3e0d656c4`
+- Worker: `gurus-notebook-publisher`
+- Public endpoint: `https://gurus-notebook-publisher.riturajratan.workers.dev`
+- KV namespace: `gurus-notebook-drafts` (`015bec19c4b64c5f83ba16ca3a0b0b76`)
+- The tested publishing source was deployed through the dashboard. Bindings, non-secret configuration and secrets must be verified before enabling publishing.
+
+These identifiers and endpoint are public configuration, not credentials.
+
+The `DRAFTS` KV binding was verified in the Worker settings. Rate limiter configuration was opened but not saved: Chrome blocked browser automation while an extension UI was open. Non-secret environment variables and private secrets remain to be configured. No secret values were entered.

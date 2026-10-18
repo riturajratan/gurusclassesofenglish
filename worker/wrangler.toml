@@ -1,6 +1,7 @@
 name = "gurus-notebook-publisher"
 main = "src/index.mjs"
 compatibility_date = "2026-10-18"
+account_id = "72dbaa9606b6dd363b5a50e3e0d656c4"
 
 [vars]
 GITHUB_REPO = "riturajratan/gurusclassesofenglish"
@@ -12,7 +13,7 @@ ALLOWED_ORIGINS = "https://www.gurusclassesofenglish.com,https://gurusclassesofe
 
 [[kv_namespaces]]
 binding = "DRAFTS"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "015bec19c4b64c5f83ba16ca3a0b0b76"
 
 [[ratelimits]]
 name = "LOGIN_LIMIT"
