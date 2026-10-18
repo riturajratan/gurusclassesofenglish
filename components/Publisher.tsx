@@ -99,6 +99,7 @@ export default function Publisher() {
     [removeSlug, setRemoveSlug] = useState('');
   const fileInput = useRef<HTMLInputElement>(null);
   const actionLock = useRef(false);
+  const [autoPreparePending, setAutoPreparePending] = useState(false);
   const api = useCallback(
     async (path: string, body?: unknown) => {
       if (!navigator.onLine)
@@ -144,7 +145,7 @@ export default function Publisher() {
       setDraftId('');
       setReceipt(null);
       setReview(false);
-      setMessage('Image ready. Next, prepare the lesson draft.');
+      setAutoPreparePending(true);
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -178,7 +179,7 @@ export default function Publisher() {
             setDraftId('');
             setFields({ ...empty });
             setReceipt(null);
-            setMessage('Shared image received. Prepare your lesson when you are ready.');
+            setAutoPreparePending(true);
           } catch (e) {
             setError((e as Error).message);
           }
@@ -282,10 +283,10 @@ export default function Publisher() {
       actionLock.current = false;
     }
   }
-  async function prepare() {
+  const prepare = useCallback(async () => {
     if (!image || actionLock.current) return;
     actionLock.current = true;
-    setBusy('Preparing your lesson and SEO draft…');
+    setBusy('Reading your image and filling the lesson, summary and SEO details…');
     setError('');
     try {
       if (ready && token) {
@@ -306,7 +307,12 @@ export default function Publisher() {
       setBusy('');
       actionLock.current = false;
     }
-  }
+  }, [image, ready, token, api]);
+  useEffect(() => {
+    if (!autoPreparePending || !image || checking || (ready && !token)) return;
+    setAutoPreparePending(false);
+    void prepare();
+  }, [autoPreparePending, image, checking, ready, token, prepare]);
   function completeFields() {
     return {
       ...fields,
@@ -387,12 +393,12 @@ export default function Publisher() {
         Your teacher’s desk<span className="coral-dot">.</span>
       </h1>
       <p className="desk-lead">
-        Bring the image you made in ChatGPT. Review the lesson, make it yours, and share it with
-        your readers.
+        Choose your image. We fill in the lesson and search details automatically.
+        Check the category, review and publish.
       </p>
       <div className="steps">
         <strong>01 / CHOOSE AN IMAGE</strong>
-        <span>02 / REVIEW YOUR LESSON</span>
+        <span>02 / CHECK THE CATEGORY</span>
         <span>03 / PUBLISH</span>
       </div>
       {checking ? (
@@ -510,8 +516,8 @@ export default function Publisher() {
           <section className="desk-panel">
             <h2>Start with your image.</h2>
             <p className="desk-help">
-              Save the image from ChatGPT, then choose it here. On Android, you can also install
-              this site and try sharing an image to Guru’s from your Gallery.
+              Choose the image you saved from ChatGPT. The title, lesson text, summary, tags and
+              search details will fill automatically.
             </p>
             <label className="upload-zone">
               <strong>Choose your lesson image</strong>
@@ -533,15 +539,15 @@ export default function Publisher() {
             {image && (
               <img className="upload-preview" src={image} alt="Your selected lesson image" />
             )}
-            {image && !draftId && (
+            {image && !busy && (!draftId || !fields.content) && (
               <div className="desk-actions">
                 <button className="button" onClick={prepare} disabled={!!busy}>
-                  {ready ? 'Prepare my lesson →' : 'Try the editor →'}
+                  {ready ? 'Retry automatic fill →' : 'Try the editor →'}
                 </button>
               </div>
             )}
           </section>
-          {editorVisible && (
+          {editorVisible && !busy && !autoPreparePending && (
             <section className="desk-panel">
               {review ? (
                 <>
@@ -577,9 +583,10 @@ export default function Publisher() {
                 </>
               ) : (
                 <form onSubmit={preview}>
-                  <h2>Make the lesson yours.</h2>
+                  <h2>Check your lesson.</h2>
                   <p className="desk-help">
-                    Check the text against your image. Everything below can be edited.
+                    Check the category and the text against your image. The other details are ready;
+                    you can edit anything before publishing.
                   </p>
                   <label htmlFor="post-title" className="field-label">
                     Lesson title

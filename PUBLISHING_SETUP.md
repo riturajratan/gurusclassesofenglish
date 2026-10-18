@@ -128,3 +128,6 @@ Deployment verified: commit `3249c03` was fast-forwarded to main without overwri
 
 
 First real publication verified: the user published “Pay Off: Meaning and Examples — Word Power 7”. The desk reported Live and the public page showed the supplied image, both bilingual examples and the teacher attribution. URL: https://gurusclassesofenglish.com/blog/pay-off-meaning-and-examples-word-power-7-ca764f37-5f8e/ . The initial AI draft request fell back to manual entry; the content was manually filled for this post. A Worker update now avoids spending the small draft output budget on reasoning for the configured model and surfaces safe, actionable account/model/credit failures without exposing provider payloads. Ten Worker tests and TypeScript pass. Real AI retry still needs verification.
+
+
+The teacher desk now starts preparation automatically after choosing a file or receiving an Android-shared image. Successful preparation fills every field; the teacher checks category, reviews, and publishes. Manual retry remains available after failure. The editor waits until preparation finishes so late AI results cannot overwrite typing. Existing saved drafts are restored without another automatic request.
