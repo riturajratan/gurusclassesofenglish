@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint"
+    "test:worker": "node --test tests/worker.test.mjs",
+    "typecheck": "tsc --noEmit --incremental false"
   },
   "keywords": [],
   "author": "S.D. Singh Ratan",
