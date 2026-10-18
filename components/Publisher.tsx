@@ -221,6 +221,7 @@ export default function Publisher() {
         `/status?commit=${encodeURIComponent(target.commit)}&slug=${encodeURIComponent(target.slug)}`,
       );
       setReceipt(result);
+      if (result.status === 'live') setMessage('Your lesson is live and ready to share.');
       if (result.status === 'failed') setError(result.message);
       return result;
     } catch (e) {
@@ -246,6 +247,7 @@ export default function Publisher() {
         );
         if (!active) return;
         setReceipt(result);
+        if (result.status === 'live') setMessage('Your lesson is live and ready to share.');
         if (result.status === 'failed') setError(result.message);
         if (result.status === 'publishing') timer = setTimeout(poll, 10000);
       } catch (e) {

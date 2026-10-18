@@ -159,7 +159,7 @@ test('a GitHub conflict preserves the draft and never force pushes', async () =>
 test('AI draft text is validated; invalid output falls back to manual entry without losing the image', async () => {
   const env = environment();
   env.OPENAI_API_KEY = 'test-key';
-  env.OPENAI_MODEL = 'test-vision-model';
+  env.OPENAI_MODEL = 'gpt-5.6-terra';
   const token = await createSession(secret);
   const original = globalThis.fetch;
   try {
@@ -168,6 +168,7 @@ test('AI draft text is validated; invalid output falls back to manual entry with
         assert.equal(url, 'https://api.openai.com/v1/responses');
         const body = JSON.parse(options.body);
         assert.equal(body.store, false);
+        assert.deepEqual(body.reasoning, { effort: 'none' });
         assert.equal(body.text.format.strict, true);
         assert.equal(body.input[0].content[1].image_url, image);
         return Response.json({ output: [{ content: [{ type: 'output_text', text: output }] }] });
@@ -180,6 +181,27 @@ test('AI draft text is validated; invalid output falls back to manual entry with
   } finally {
     globalThis.fetch = original;
   }
+});
+test('AI failures give safe account guidance and preserve the image', async () => {
+  const env = environment();
+  env.OPENAI_API_KEY = 'test-key';
+  env.OPENAI_MODEL = 'gpt-5.6-terra';
+  const token = await createSession(secret);
+  const original = globalThis.fetch;
+  try {
+    for (const [status, code, expected] of [
+      [401, 'invalid_api_key', 'key was not accepted'],
+      [404, 'model_not_found', 'model is not available'],
+      [429, 'insufficient_quota', 'available API credit'],
+    ]) {
+      globalThis.fetch = async () => Response.json({ error: { code, message: 'PRIVATE PROVIDER DETAIL' } }, { status });
+      const result = await (await request('/draft', env, { token, body: { image } })).json();
+      assert.equal(result.generated, false);
+      assert.ok(result.message.includes(expected));
+      assert.ok(!JSON.stringify(result).includes('PRIVATE PROVIDER DETAIL'));
+      assert.equal((await env.DRAFTS.get('draft:' + result.id, 'json')).image, image);
+    }
+  } finally { globalThis.fetch = original; }
 });
 test('publication status requires the lesson marker and surfaces failed builds', async () => {
   const env = environment();

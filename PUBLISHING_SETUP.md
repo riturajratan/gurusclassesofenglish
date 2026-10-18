@@ -1,6 +1,6 @@
 # Guru’s notebook: deployment and account connection
 
-The new site and publisher are implemented in this checkout. **They are not live yet.** The original project folder is unchanged. Do not paste private keys into chat, Git, screenshots, or frontend environment variables.
+The new site and publisher are implemented in this checkout. **The frontend and Worker are now live; authenticated publishing still needs its first real verification.** The original project folder is unchanged. Do not paste private keys into chat, Git, screenshots, or frontend environment variables.
 
 ## Architecture
 
@@ -122,3 +122,9 @@ Credential metadata verified: ADMIN_PASSWORD, SESSION_SECRET and GITHUB_TOKEN ar
 Current status (18 October 2026): the user entered all four secrets directly into Cloudflare. The public health endpoint returned `{"ready":true,"ai":true}`. This confirms configuration presence, not yet a successful authenticated OpenAI/GitHub publishing request. `OPENAI_MODEL` is configured as `gpt-5.6-terra`. GitHub Pages source was switched to GitHub Actions and Enforce HTTPS enabled, preserving the existing custom domain. Frontend deployment and real publishing verification are next.
 
 Design update: the user chose a clean education website while retaining the original warm palette. The homepage now introduces the teacher, then topic navigation, a featured lesson and the lesson library. Article reading controls offer Light, Warm and Night backgrounds and 19/22/25px text. Production build, TypeScript and all nine Worker tests passed. A 390px browser viewport showed no horizontal overflow; saved reading preferences were verified after reload.
+
+
+Deployment verified: commit `3249c03` was fast-forwarded to main without overwriting remote changes. GitHub Actions run `39123114261` completed successfully (build and deploy). The public HTTPS homepage displays the new education layout and teacher photo. `/publish/` successfully connects to the Worker and shows the password sign-in form. The user must sign in with their private publishing password before real AI draft, GitHub write and live-lesson verification can proceed. No password or API key values were read.
+
+
+First real publication verified: the user published “Pay Off: Meaning and Examples — Word Power 7”. The desk reported Live and the public page showed the supplied image, both bilingual examples and the teacher attribution. URL: https://gurusclassesofenglish.com/blog/pay-off-meaning-and-examples-word-power-7-ca764f37-5f8e/ . The initial AI draft request fell back to manual entry; the content was manually filled for this post. A Worker update now avoids spending the small draft output budget on reasoning for the configured model and surfaces safe, actionable account/model/credit failures without exposing provider payloads. Ten Worker tests and TypeScript pass. Real AI retry still needs verification.
