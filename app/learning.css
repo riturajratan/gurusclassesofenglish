@@ -44,7 +44,10 @@
 .learning-step p { font-size: 16px; color: var(--muted); line-height: 1.7; margin: 0; }
 .education-invitation { border-top: 1px solid var(--line); }
 .education-invitation p a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; white-space: nowrap; }
-.footer-phone { display: inline-block; font-size: 16px; line-height: 1.7; margin-top: 6px; text-decoration: underline; text-underline-offset: 5px; }
+.footer-contact { display: flex; flex-wrap: wrap; column-gap: 24px; row-gap: 4px; margin-top: 12px; max-width: 620px; }
+.footer-contact a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; min-width: 0; font-size: 16px; line-height: 1.6; text-decoration: underline; text-underline-offset: 5px; }
+.footer-contact svg { flex-shrink: 0; }
+.footer-contact span { overflow-wrap: anywhere; }
 .footer-links a { min-height: 44px; display: inline-flex; align-items: center; }
 .practice-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 29px; margin-block: 37px; }
 .practice-heading { display: flex; align-items: center; gap: 16px; }
