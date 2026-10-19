@@ -6,6 +6,7 @@ import LessonCard from '@/components/LessonCard';
 import LessonArt from '@/components/LessonArt';
 import { absolute, jsonLd, site } from '@/lib/site';
 import { BookOpen, Lightbulb, Heart } from 'lucide-react';
+import CategoryBadge from '@/components/CategoryBadge';
 export const metadata: Metadata = { alternates: { canonical: absolute('/') } };
 export default function Home() {
   const lessons = getLessons();
@@ -43,9 +44,9 @@ export default function Home() {
         </div>
         <div className="topic-grid">
           {[
-            ['Vocabulary', 'Aa', 'Useful words, clearly explained.'],
+            ['Quiz', '?', 'Practise with numbered quizzes.'],
+            ['Word Power', 'Aa', 'Words, phrasal verbs and idioms.'],
             ['Grammar', 'Gg', 'Understand how English works.'],
-            ['Common Mistakes', '✓', 'Clear up everyday confusions.'],
             ['Writing', '✎', 'Put your thoughts into words.'],
           ].map(([name, icon, description]) => (
             <Link key={name} href={`/blog/?topic=${encodeURIComponent(name)}`} className="education-topic">
@@ -67,7 +68,7 @@ export default function Home() {
             {latest.image ? <img src={latest.image} width="720" height="540" alt={latest.imageAlt || latest.title} /> : <LessonArt kind={latest.category} />}
           </Link>
           <div className="education-feature-copy">
-            <div className="card-meta"><span>{latest.category}</span><span>{latest.sample ? 'Sample lesson' : 'Latest lesson'}</span></div>
+            <div className="card-meta"><CategoryBadge category={latest.category} /><span>{latest.sample ? 'Sample lesson' : 'Latest lesson'}</span></div>
             <h3><Link href={`/blog/${latest.slug}/`}>{latest.title}</Link></h3>
             <p>{latest.excerpt}</p>
             <Link className="button" href={`/blog/${latest.slug}/`}>Read &amp; give it a try <span aria-hidden="true">→</span></Link>

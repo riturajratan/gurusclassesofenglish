@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Lesson } from '@/lib/lessons';
 import LessonArt from './LessonArt';
+import CategoryBadge from './CategoryBadge';
 export default function LessonCard({ lesson }: { lesson: Lesson }) {
   return (
     <article className="lesson-card">
@@ -24,7 +25,7 @@ export default function LessonCard({ lesson }: { lesson: Lesson }) {
       </Link>
       <div className="card-copy">
         <div className="card-meta">
-          <span>{lesson.category}</span>
+          <CategoryBadge category={lesson.category} />
           {lesson.sample && <span className="sample-label">Sample lesson</span>}
         </div>
         <h3>

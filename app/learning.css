@@ -135,3 +135,20 @@
   .contact-email { font-size: 16px; }
   .contact-teacher strong { font-size: 28px; }
 }
+.category-badge {
+  display: inline-flex; align-items: center; min-height: 44px;
+  padding: 7px 13px; border-radius: 9px; border: 1px solid #c6d8cf;
+  background: #e5eee8; color: #254b39; font-size: 14px;
+  font-weight: 750; line-height: 1.35; letter-spacing: .015em;
+  text-transform: none; text-decoration: none;
+}
+.category-badge[data-category="Vocabulary"] { background: #e7efdb; color: #33511f; border-color: #cad9b3; }
+.category-badge[data-category="Word Power"] { background: #e7efdb; color: #33511f; border-color: #cad9b3; }
+.category-badge[data-category="Quiz"] { background: #e1edf9; color: #204c77; border-color: #bfd3e9; }
+.category-badge[data-category="Grammar"] { background: #e1edf9; color: #204c77; border-color: #bfd3e9; }
+.category-badge[data-category="Common Mistakes"] { background: #fae6dc; color: #803d27; border-color: #e7c2b2; }
+.category-badge[data-category="Writing"] { background: #eee5f8; color: #634080; border-color: #d6c3e9; }
+.category-badge[data-category="Speaking"] { background: #f7edcb; color: #695115; border-color: #dfd09e; }
+a.category-badge:hover { text-decoration: underline; text-underline-offset: 3px; }
+:root[data-reading-theme='night'] .button:not(.button-outline) { background: #b8d7c4; color: #14221f; border-color: #b8d7c4; }
+.article-heading > .category-badge { margin-bottom: 18px; }

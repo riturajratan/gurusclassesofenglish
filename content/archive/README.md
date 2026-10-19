@@ -8,6 +8,7 @@ This import was prepared manually from the owner's `PAPA images` folder. No publ
 - Seven unrelated or wishes images excluded: five festival/Teacher's Day greetings, one insurance promotion and one news clipping.
 - Five additional repeated/alternate lesson versions excluded in favour of a clearer or complete version.
 - Word Power 68 and any other missing counters were not invented.
+- Numbered lessons use **Quiz** or **Word Power** as their public category; Grammar/Vocabulary remain descriptive tags. Each series filter sorts by counter (highest first), with supplementary A notes adjacent to their parent. The combined listing remains ordered by publication date. Future numbered publisher titles are classified at build time without another API call.
 - Only reviewed WebP assets and article JSON are committed. Raw originals are ignored by Git.
 
 ## Dates

@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Lesson } from '@/lib/lessons';
 import LessonCard from './LessonCard';
-const topics = ['All lessons', 'Vocabulary', 'Grammar', 'Common Mistakes', 'Writing', 'Speaking'];
+const topics = ['All lessons', 'Quiz', 'Word Power', 'Vocabulary', 'Grammar', 'Common Mistakes', 'Writing', 'Speaking'];
 export default function LessonArchive({ lessons }: { lessons: Lesson[] }) {
   const [topic, setTopic] = useState('All lessons');
   const [search, setSearch] = useState('');
@@ -18,7 +18,12 @@ export default function LessonArchive({ lessons }: { lessons: Lesson[] }) {
           `${item.title} ${item.excerpt} ${item.tags.join(' ')}`
             .toLowerCase()
             .includes(search.toLowerCase().trim()),
-      ),
+      ).sort((a, b) => {
+        if ((topic === 'Quiz' || topic === 'Word Power') && a.seriesNumber !== undefined && b.seriesNumber !== undefined) {
+          return b.seriesNumber - a.seriesNumber || (b.seriesPart || '').localeCompare(a.seriesPart || '');
+        }
+        return Date.parse(b.publishedAt) - Date.parse(a.publishedAt);
+      }),
     [lessons, topic, search],
   );
   function choose(value: string) {

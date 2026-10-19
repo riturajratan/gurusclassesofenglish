@@ -17,9 +17,13 @@ export interface Lesson {
   seoDescription?: string;
   sample?: boolean;
   dateEstimated?: boolean;
+  seriesNumber?: number;
+  seriesPart?: string;
 }
 export const topics = [
   'All lessons',
+  'Quiz',
+  'Word Power',
   'Vocabulary',
   'Grammar',
   'Common Mistakes',
@@ -36,7 +40,14 @@ export function getLessons(): Lesson[] {
   return [
     ...lessons,
     ...legacy.filter((post) => !lessons.some((item) => item.slug === post.slug)),
-  ].sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
+  ].map((post) => {
+    // Keep future publisher posts in their numbered series without another AI call.
+    const wp = post.title.match(/\bword\s*power\s*[-–—:]?\s*(\d+)\b/i);
+    const quiz = post.title.match(/\bquiz\s*[-–—:]?\s*(\d+)([A-Z]?)\b/i);
+    const match = wp || quiz;
+    return match ? { ...post, category: wp ? 'Word Power' : 'Quiz',
+      seriesNumber: Number(match[1]), seriesPart: wp ? '' : (match[2] || '').toUpperCase() } : post;
+  }).sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
 }
 export function getLesson(slug: string) {
   return getLessons().find((item) => item.slug === slug);

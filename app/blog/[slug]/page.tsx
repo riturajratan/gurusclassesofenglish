@@ -1,4 +1,5 @@
 import AuthorPhoto from '@/components/AuthorPhoto';
+import CategoryBadge from '@/components/CategoryBadge';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -62,7 +63,7 @@ export default async function LessonPage({ params }: Props) {
             ← Back to all lessons
           </Link>
           <header className="article-heading">
-            <p className="eyebrow">{post.category}</p>
+            <CategoryBadge category={post.category} />
             <h1>{post.title}</h1>
             <div className="article-meta">
               <span className="article-author">
