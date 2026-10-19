@@ -14,12 +14,8 @@ export default function Header() {
     <header className="site-header">
       <div className="shell header-inner">
         <Link href="/" className="brand" aria-label="Gurus Classes of English home">
-          <span className="brand-mark">
-            g<span>.</span>
-          </span>
-          <span className="brand-name">
-            Gurus Classes<span>OF ENGLISH</span>
-          </span>
+          <img className="brand-logo" src="/logo.jpeg" alt="" width="231" height="219" />
+          <span className="brand-wordmark">Gurus Classes<span>of English</span></span>
         </Link>
         <button
           className="menu-toggle"
