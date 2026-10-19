@@ -16,6 +16,7 @@ export interface Lesson {
   seoTitle?: string;
   seoDescription?: string;
   sample?: boolean;
+  dateEstimated?: boolean;
 }
 export const topics = [
   'All lessons',

@@ -77,6 +77,7 @@ export default async function LessonPage({ params }: Props) {
                   timeZone: 'Asia/Kolkata',
                 })}
               </time>
+              {post.dateEstimated && <span title="The original date was not recorded. This date was estimated from the lesson counter and dated archive posts.">Estimated archive date</span>}
             </div>
           </header>
           <ReadingControls />

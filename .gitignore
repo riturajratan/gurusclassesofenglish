@@ -12,3 +12,7 @@ next-env.d.ts
 .vercel
 worker/.dev.vars
 worker/.wrangler/
+
+# Original lesson-image archive; publish only reviewed, optimized lesson assets.
+/PAPA images/
+/papa images/
