@@ -38,8 +38,10 @@ Set these **GitHub repository Actions variables** (Settings → Secrets and vari
 → Actions → Variables), then run the Publish notebook workflow again. They are
 public identifiers, not API keys:
 
-- `NEXT_PUBLIC_GA_MEASUREMENT_ID`: the `G-...` Measurement ID from the **Gurus** GA4
-  web data stream. Do not use a numeric property ID or another site's stream.
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID`: optional override for the **Gurus** GA4 web data
+  stream. Production defaults to `G-ED1TVZS6LQ` (Gurus Classes website, stream
+  `16251788328` in the existing `gurusclass` account `41361260`). Do not use a
+  numeric property ID or another site's stream.
 - `NEXT_PUBLIC_GOOGLE_VERIFICATION`: optional override for the Search Console HTML
   verification tag. The public tag issued for this site's URL-prefix property in
   Rituraj's account is included in `lib/site.ts`; keep it to retain verification.
@@ -50,6 +52,9 @@ invalid. The tag loads after the page becomes interactive. In GA4's web stream,
 keep Enhanced measurement → Page views → **Page changes based on browser history
 events** enabled, so Next.js navigation is measured. The app does not emit a
 second manual `page_view` event.
+Automatic form interactions are turned off for this stream. The app sends only
+the explicit `practice_saved` event after a successful local save, without the
+student's sentence or publisher form values.
 
 Events added by the app:
 
