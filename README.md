@@ -38,7 +38,7 @@ The publisher prevents draft-only review notes from being submitted through its 
 
 `/privacy/` documents the actual public site's analytics, browser-only practice, hosting and external services. Analytics is off until a visitor explicitly allows it. Both the initial banner and privacy page offer a choice; withdrawing permission disables tracking, removes this site's GA cookies and reloads an already tracked visit. Local practice and reading preferences are kept. Storage failures fall back to a session-only choice.
 
-AdSense is **not installed or submitted** by these changes. There is no fabricated publisher ID or ads.txt entry. If ads are added later, update the disclosure to match the real advertising setup, configure any required advertising consent system for the audience and regions served, and keep editor, utility and sample pages free of ads. Analytics consent alone is not an advertising consent system. Google makes the final eligibility and approval decision.
+AdSense ownership verification uses the `google-adsense-account` meta tag for the existing publisher account `ca-pub-8791576499923818`. This metadata does not load an advertising script or display ads. Review status is managed in the AdSense dashboard. If ads are added later, update the disclosure to match the real advertising setup, configure any required advertising consent system for the audience and regions served, and keep editor, utility and sample pages free of ads. Analytics consent alone is not an advertising consent system. Google makes the final eligibility and approval decision.
 
 ## Google Analytics and Search Console
 

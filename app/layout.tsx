@@ -30,6 +30,8 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
   verification: { google: site.googleVerification },
+  // Ownership verification only; this does not load Google's advertising tag.
+  other: { "google-adsense-account": "ca-pub-8791576499923818" },
 };
 export const viewport: Viewport = {
   themeColor: "#172e2a",
