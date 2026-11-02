@@ -31,8 +31,8 @@ const lessons = files.map((file) =>
 const published = lessons.filter((lesson) => !lesson.sample);
 assert.equal(
   urls.length,
-  published.length + 5,
-  "Sitemap must include every real lesson and five public pages",
+  published.length + 6,
+  "Sitemap must include every real lesson and six public pages",
 );
 
 let articles = 0;
@@ -40,6 +40,10 @@ for (const address of urls) {
   const url = new URL(address);
   assert.equal(url.origin, origin, `Wrong sitemap origin: ${address}`);
   const html = read(decodeURIComponent(url.pathname));
+  assert.ok(
+    html.includes('href="/privacy/"'),
+    `Missing privacy link: ${address}`,
+  );
   assert.equal(canonical(html), address, `Incorrect canonical: ${address}`);
   assert.ok(meta(html, "description"), `Missing description: ${address}`);
   assert.equal(
@@ -92,6 +96,46 @@ for (const address of urls) {
     );
   }
 }
+const sampleSlugs = fs
+  .readdirSync(path.join(root, "blog"), { withFileTypes: true })
+  .filter(
+    (entry) =>
+      entry.isDirectory() && !urls.includes(`${origin}/blog/${entry.name}/`),
+  )
+  .map((entry) => entry.name);
+for (const address of urls) {
+  const html = read(decodeURIComponent(new URL(address).pathname));
+  for (const slug of sampleSlugs) {
+    assert.ok(
+      !html.includes(`href="/blog/${slug}/"`),
+      `Sample linked from public content: ${address} → ${slug}`,
+    );
+  }
+}
+for (const lesson of published) {
+  assert.ok(
+    !/note for teacher review|teacher should review|review these details before publication|add or confirm the answers before publication/i.test(
+      lesson.content,
+    ),
+    `Unresolved review note: ${lesson.slug}`,
+  );
+  if (lesson.updatedAt) {
+    assert.ok(
+      Date.parse(lesson.updatedAt) >= Date.parse(lesson.publishedAt),
+      `Update precedes publication: ${lesson.slug}`,
+    );
+    const schemas = [
+      ...read(`/blog/${lesson.slug}/`).matchAll(
+        /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g,
+      ),
+    ].map((match) => JSON.parse(match[1]));
+    assert.equal(
+      schemas.find((schema) => schema["@type"] === "BlogPosting")?.dateModified,
+      lesson.updatedAt,
+      `Wrong modification date: ${lesson.slug}`,
+    );
+  }
+}
 for (const lesson of lessons.filter((lesson) => lesson.sample)) {
   const address = `${origin}/blog/${lesson.slug}/`;
   assert.ok(!urls.includes(address), `Sample included in sitemap: ${address}`);
@@ -102,12 +146,17 @@ for (const lesson of lessons.filter((lesson) => lesson.sample)) {
 }
 // Legacy samples are loaded from lib/blogData.ts rather than content/posts.
 // Every exported lesson must be either in the sitemap or explicitly noindex.
-for (const entry of fs.readdirSync(path.join(root, 'blog'), { withFileTypes: true })) {
+for (const entry of fs.readdirSync(path.join(root, "blog"), {
+  withFileTypes: true,
+})) {
   if (!entry.isDirectory()) continue;
   const route = `/blog/${entry.name}/`;
   const address = `${origin}${route}`;
   if (!urls.includes(address)) {
-    assert.ok(meta(read(route), 'robots')?.includes('noindex'), `Orphan indexable lesson: ${address}`);
+    assert.ok(
+      meta(read(route), "robots")?.includes("noindex"),
+      `Orphan indexable lesson: ${address}`,
+    );
   }
 }
 for (const route of ["/publish/", "/offline/"]) {

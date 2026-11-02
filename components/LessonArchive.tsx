@@ -3,29 +3,24 @@ import { useEffect, useMemo, useState } from "react";
 import type { Lesson } from "@/lib/lessons";
 import LessonCard from "./LessonCard";
 import { trackEvent } from "./Analytics";
-const topics = [
-  "All lessons",
-  "Quiz",
-  "Word Power",
-  "Vocabulary",
-  "Grammar",
-  "Common Mistakes",
-  "Writing",
-  "Speaking",
-];
+import { availableTopics, matchesTopic } from "@/lib/topics";
 export default function LessonArchive({ lessons }: { lessons: Lesson[] }) {
+  const topics = useMemo(
+    () => ["All lessons", ...availableTopics(lessons)],
+    [lessons],
+  );
   const [topic, setTopic] = useState("All lessons");
   const [search, setSearch] = useState("");
   useEffect(() => {
     const initial = new URLSearchParams(window.location.search).get("topic");
     if (initial && topics.includes(initial)) setTopic(initial);
-  }, []);
+  }, [topics]);
   const filtered = useMemo(
     () =>
       lessons
         .filter(
           (item) =>
-            (topic === "All lessons" || item.category === topic) &&
+            matchesTopic(item, topic) &&
             `${item.title} ${item.excerpt} ${item.tags.join(" ")}`
               .toLowerCase()
               .includes(search.toLowerCase().trim()),

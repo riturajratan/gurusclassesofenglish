@@ -1,7 +1,7 @@
 {
   "slug": "passive-to-active-voice-rules-quiz-112a",
   "title": "Passive to Active Voice: Rules — Quiz 112A",
-  "content": "## Passive to Active Voice: Rules\n\nReview subjects, objects and verb forms when changing passive voice into active voice.\n\n### Lesson focus\n\n1. By whom → Who\n2. Passive voice: S + HV + V3 + by + O\n3. Active voice: O + HV + V1/V2 + S\n\n### Practise with the image\n\nRead the full lesson image for the original exercise, notes and any answer key shown. Write your own answers before checking a key. A key labelled for another quiz belongs to that quiz.",
+  "content": "## Passive to Active Voice: Rules\n\nReview subjects, objects and verb forms when changing passive voice into active voice.\n\n### Lesson focus\n\n1. By whom → Who\n2. Passive voice: S + HV + V3 + by + O\n3. Active voice: O + HV + V1/V2 + S\n\n### Understand the pattern\n\nTo recover an active sentence, identify who or what performs the action. If no agent is named, a reasonable general subject may be needed, but the sentence alone might not identify a unique person. Do not invent a named agent.\n\n### Worked answers and explanation\n\nThe books have been checked by the librarian → The librarian has checked the books. The new subject librarian is singular, so has replaces have. 'The door was closed' can become 'Someone closed the door' only if the intended meaning describes an action rather than merely a closed state.\n\n### Try another\n\nChange: By whom was the prize presented?\n\n### Suggested answer\n\nWho presented the prize? Who is now the active subject. A subject question does not need did: avoid 'Who did presented the prize?'",
   "category": "Quiz",
   "excerpt": "Review subjects, objects and verb forms when changing passive voice into active voice.",
   "tags": [
@@ -17,5 +17,6 @@
   "publishedAt": "2026-05-21T15:45:00Z",
   "sample": false,
   "dateEstimated": true,
-  "image": "/images/lessons/passive-to-active-voice-rules-quiz-112a.webp"
+  "image": "/images/lessons/passive-to-active-voice-rules-quiz-112a.webp",
+  "updatedAt": "2026-11-02T06:06:42.000Z"
 }

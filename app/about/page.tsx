@@ -41,9 +41,24 @@ export default function About() {
           </p>
           <h2>Learn a little. Use it often.</h2>
           <p>
-            Explore vocabulary, grammar, common mistakes and writing. Read at
-            your own pace, try an example, and share a lesson with someone who
-            might enjoy it.
+            Explore vocabulary, grammar and practice quizzes. Read at your own
+            pace, try an example, and share a lesson with someone who might
+            enjoy it.
+          </p>
+          <h2>How the notebook is prepared</h2>
+          <p>
+            Original classroom cards sit alongside reading notes, worked answers
+            and additional practice. The typed explanations may expand on a card
+            or revise an example for clarity. Suggested answers show one
+            suitable form; other answers can be correct when they preserve the
+            meaning and fit the context.
+          </p>
+          <p>
+            Older lessons with an estimated publication date are labelled. When
+            a lesson is expanded or corrected, its update date is shown
+            separately. If you find an error or an unclear answer, please{" "}
+            <Link href="/contact/">contact the teacher</Link> with the lesson
+            title so it can be checked.
           </p>
           <Link className="button" href="/blog/">
             Explore the notebook ↗

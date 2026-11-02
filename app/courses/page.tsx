@@ -1,9 +1,11 @@
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getPublishedLessons } from "@/lib/lessons";
+import { availableTopics } from "@/lib/topics";
 export const metadata: Metadata = pageMetadata(
   "Explore English topics",
-  "Find English lessons in vocabulary, grammar, writing and speaking. Choose a topic and start learning.",
+  "Find English vocabulary lessons, grammar explanations and numbered practice quizzes. Choose a topic and start learning.",
   "/courses/",
 );
 export default function Topics() {
@@ -22,7 +24,7 @@ export default function Topics() {
         </p>
       </div>
       <section className="section topic-grid">
-        {["Vocabulary", "Grammar", "Writing", "Speaking"].map((name, i) => (
+        {availableTopics(getPublishedLessons()).map((name, i) => (
           <Link
             className="topic-card"
             key={name}

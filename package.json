@@ -8,7 +8,8 @@
     "start": "next start",
     "test:worker": "node --test tests/worker.test.mjs",
     "typecheck": "tsc --noEmit --incremental false",
-    "test:seo": "node scripts/audit-seo.mjs"
+    "test:seo": "node scripts/audit-seo.mjs",
+    "test:privacy": "node --test tests/privacy.test.mjs"
   },
   "keywords": [],
   "author": "S.D. Singh Ratan",

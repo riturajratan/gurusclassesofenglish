@@ -1,7 +1,7 @@
 {
   "slug": "grammar-reference-conditional-sentences-introduction",
   "title": "Conditional Sentences: Introduction",
-  "content": "## Conditional Sentences: Introduction\n\nUnderstand the conditional clause and the main clause.\n\n### Lesson focus\n\n1. If it rains, we shall get wet.\n2. The conditional clause begins with if, when, as soon as, till, until, unless, provided that, except that or in case.\n\n### Practise with the image\n\nRead the full lesson image for the original exercise, notes and any answer key shown. Write your own answers before checking a key. A key labelled for another quiz belongs to that quiz.",
+  "content": "## Conditional Sentences: Introduction\n\nUnderstand the conditional clause and the main clause.\n\n### Lesson focus\n\n1. If it rains, we shall get wet.\n2. An if-clause introduces a condition; distinguish it from time clauses and precautions introduced by other expressions.\n\n### Understand the pattern\n\nA conditional sentence connects a condition with a consequence. If normally introduces the condition. Other expressions need different interpretations: unless means if not, provided that sets a requirement, and in case commonly expresses a precaution. Time clauses with when or until are not interchangeable with every if-clause.\n\n### Worked answers and explanation\n\nIf it rains, we will get wet has a condition and a possible result. 'Take an umbrella in case it rains' instead explains a precaution taken before knowing whether it will rain. Replacing in case with if changes when and why the umbrella is taken.\n\n### Try another\n\nRewrite with the condition second: If you practise, your confidence will grow.\n\n### Suggested answer\n\nYour confidence will grow if you practise. The meaning stays the same; a comma is normally unnecessary before the final if-clause.",
   "category": "Grammar",
   "excerpt": "Understand the conditional clause and the main clause.",
   "tags": [
@@ -16,5 +16,6 @@
   "publishedAt": "2026-04-13T03:30:00Z",
   "sample": false,
   "dateEstimated": true,
-  "image": "/images/lessons/grammar-reference-conditional-sentences-introduction.webp"
+  "image": "/images/lessons/grammar-reference-conditional-sentences-introduction.webp",
+  "updatedAt": "2026-11-02T06:06:42.000Z"
 }

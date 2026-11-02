@@ -8,6 +8,7 @@ An English-first, mobile-friendly lesson website for S.D. Singh Ratan. A static 
 npm ci
 npm run dev
 npm run test:worker
+npm run test:privacy
 npm run typecheck
 npm run build
 npm run test:seo
@@ -27,7 +28,17 @@ Open the URL printed by Next.js. `/publish/` works as an explicitly labelled edi
 
 [Read the account setup and deployment guide](PUBLISHING_SETUP.md) before publishing. All secrets belong in the Worker, never in public frontend variables. The original standalone HTML files remain for rollback; the new workflow deploys the Next.js `out/` directory.
 
-Sample lessons are labelled, excluded from the sitemap and set to noindex. Real teacher-published lessons appear first. No student counts, degrees, reviews or other unverified claims are used in the new pages.
+Sample lessons keep their existing URLs, labels and noindex directives, but are excluded from the homepage, archive and related lessons. Public topic filters are based on real content and match descriptive tags as well as categories. No student counts, degrees, reviews or other unverified claims are used in the pages.
+
+## Lesson quality and advertising readiness
+
+The 146 published archive lessons were expanded on 2 November 2026 with individual usage notes, worked answers and additional practice. Original classroom images and article URLs remain. Reading notes explicitly distinguish source cards from revised examples and additional explanations. Publication dates are preserved; `updatedAt` is shown separately and is used in article metadata and the sitemap. Grammar lessons link to further reading from the British Council or Cambridge Grammar where relevant.
+
+The publisher prevents draft-only review notes from being submitted through its editor; the export audit also rejects unresolved review markers in real published posts. These checks cannot establish that every answer is correct: editorial review remains necessary, especially for exercises with ambiguous context. Corrections can be reported through the contact page.
+
+`/privacy/` documents the actual public site's analytics, browser-only practice, hosting and external services. Analytics is off until a visitor explicitly allows it. Both the initial banner and privacy page offer a choice; withdrawing permission disables tracking, removes this site's GA cookies and reloads an already tracked visit. Local practice and reading preferences are kept. Storage failures fall back to a session-only choice.
+
+AdSense is **not installed or submitted** by these changes. There is no fabricated publisher ID or ads.txt entry. If ads are added later, update the disclosure to match the real advertising setup, configure any required advertising consent system for the audience and regions served, and keep editor, utility and sample pages free of ads. Analytics consent alone is not an advertising consent system. Google makes the final eligibility and approval decision.
 
 ## Google Analytics and Search Console
 
@@ -48,7 +59,7 @@ public identifiers, not API keys:
 
 For local builds copy `.env.example` to `.env.local`. Analytics deliberately stays
 off on localhost and preview domains, and when the Measurement ID is empty or
-invalid. The tag loads after the page becomes interactive. In GA4's web stream,
+invalid. The tag loads after the page becomes interactive and only after the visitor allows analytics. In GA4's web stream,
 keep Enhanced measurement → Page views → **Page changes based on browser history
 events** enabled, so Next.js navigation is measured. The app does not emit a
 second manual `page_view` event.
@@ -83,5 +94,5 @@ are determined by Google and are not guaranteed by a successful build.
 
 `npm run test:seo` checks the actual exported pages, sitemap coverage, canonical
 URLs, social metadata and image files, JSON-LD, breadcrumbs, single H1 headings,
-and sample/utility exclusions. The deployment workflow runs this audit before
+privacy links, updated dates, draft markers and sample/utility exclusions. `npm run test:privacy` covers analytics preferences, cookie removal, storage failure, draft-note detection and populated topic selection. The deployment workflow runs these checks before
 uploading the site.

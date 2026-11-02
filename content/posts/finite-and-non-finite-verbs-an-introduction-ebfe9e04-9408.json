@@ -1,12 +1,12 @@
 {
   "slug": "finite-and-non-finite-verbs-an-introduction-ebfe9e04-9408",
   "title": "Finite and Non-Finite Verbs: An Introduction",
-  "content": "# Finite / Non-Finite Verbs – 1\n## Introduction\n\nEnglish verbs are either **finite verbs** or **non-finite verbs**.\n\n## Finite Verbs\n\n- A finite verb agrees with its subject in number and person.\n- A finite verb is an obligatory (compulsory) element of a sentence.\n\n**Example:**\n\nHe **PLAYS** cricket.\n\n## Non-Finite Verbs\n\nA non-finite verb does not have to agree with its subject in number and person. The relation between the subject and a non-finite verb is one of independence. That’s why the non-finite verbs are often called absolute verbs.\n\n**Example:**\n\nHe wants **TO PLAY** cricket.\n\nThe image also includes a “Very Happy Dussehra” greeting: “May the victory of good over evil always inspire you in life!” This is unrelated to the English lesson and has not been included as teaching content. No Hindi meanings or translations are shown in the image.",
+  "content": "## Finite and Non-Finite Verbs: An Introduction\n\nAn introduction to finite and non-finite verbs, including their relationship with the subject and examples such as “He plays cricket” and “He wants to play cricket.”\n\n### Understand the pattern\n\nA finite verb heads a finite clause and can express tense or modality. Many finite present forms show subject agreement, as plays does with he. Not every finite verb visibly changes for person: modal can has the same form with I and she.\n\n### Worked answers and explanation\n\nIn 'He plays cricket', plays is finite. In 'He wants to play cricket', wants is finite and to play is non-finite. Infinitives and participles can be non-finite: 'Reading quietly, she waited' has the non-finite reading and finite waited. Non-finite forms are not generally called absolute verbs; an absolute construction is a specific different structure.\n\n### Try another\n\nIdentify the finite verb: They hope to finish before lunch.\n\n### Suggested answer\n\nHope is finite and agrees with they. To finish is a non-finite infinitive; it does not independently establish the tense of the sentence.",
   "category": "Grammar",
-  "excerpt": "An introduction to finite and non-finite verbs, including their relationship with the subject and examples such as “He plays cricket” and “He wants to play cricket.”",
+  "excerpt": "Identify finite verbs, infinitives and participles with clear examples and a short practice exercise.",
   "imageAlt": "English grammar lesson graphic titled “Finite / Non-Finite Verbs – 1 (Introduction).” It defines finite verbs and non-finite verbs and gives the examples “He plays cricket” and “He wants to play cricket.”",
   "seoTitle": "Finite and Non-Finite Verbs: Introduction",
-  "seoDescription": "Learn the basic distinction between finite and non-finite verbs, including subject agreement and examples such as “He plays cricket” and “He wants to play cricket.”",
+  "seoDescription": "Identify finite verbs, infinitives and participles with clear examples and a short practice exercise.",
   "tags": [
     "Finite verbs",
     "Non-finite verbs",
@@ -17,5 +17,6 @@
   "image": "/images/lessons/finite-and-non-finite-verbs-an-introduction-ebfe9e04-9408.webp",
   "author": "S.D. Singh Ratan",
   "publishedAt": "2026-10-20T11:52:25.661Z",
-  "sample": false
+  "sample": false,
+  "updatedAt": "2026-11-02T06:06:42.000Z"
 }

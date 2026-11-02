@@ -4,7 +4,7 @@ import { absolute, site } from "./site";
 export const siteTitle =
   "Gurus Classes of English — A little English, every day";
 export const siteDescription =
-  "Discover vocabulary, grammar and writing lessons with Gurus Classes of English and S.D. Singh Ratan. A little practice, a little more confidence, every day.";
+  "Discover English vocabulary, grammar explanations and practice quizzes with Gurus Classes of English and S.D. Singh Ratan. Learn a little, every day.";
 
 export function pageMetadata(
   title: string,

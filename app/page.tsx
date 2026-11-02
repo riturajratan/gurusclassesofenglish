@@ -1,7 +1,7 @@
 import AuthorPhoto from "@/components/AuthorPhoto";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getLessons } from "@/lib/lessons";
+import { getPublishedLessons } from "@/lib/lessons";
 import LessonCard from "@/components/LessonCard";
 import LessonArt from "@/components/LessonArt";
 import { site } from "@/lib/site";
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   title: { absolute: siteTitle },
 };
 export default function Home() {
-  const lessons = getLessons();
-  const latest = lessons.find((item) => !item.sample) || lessons[0];
+  const lessons = getPublishedLessons();
+  const latest = lessons[0];
   return (
     <>
       <section className="education-hero shell">
@@ -68,7 +68,7 @@ export default function Home() {
             ["Quiz", "?", "Practise with numbered quizzes."],
             ["Word Power", "Aa", "Words, phrasal verbs and idioms."],
             ["Grammar", "Gg", "Understand how English works."],
-            ["Writing", "✎", "Put your thoughts into words."],
+            ["Vocabulary", "✎", "Find a useful word for every day."],
           ].map(([name, icon, description]) => (
             <Link
               key={name}

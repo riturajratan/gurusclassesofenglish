@@ -3,7 +3,12 @@ import CategoryBadge from "@/components/CategoryBadge";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getLessons, getLesson, readingTime } from "@/lib/lessons";
+import {
+  getLessons,
+  getPublishedLessons,
+  getLesson,
+  readingTime,
+} from "@/lib/lessons";
 import { absolute, jsonLd, site } from "@/lib/site";
 import LessonBody from "@/components/LessonBody";
 import LessonCard from "@/components/LessonCard";
@@ -12,6 +17,7 @@ import ReadingControls from "@/components/ReadingControls";
 import LessonPractice from "@/components/LessonPractice";
 import { recallFromLesson } from "@/lib/learning";
 import { lessonBreadcrumbs } from "@/lib/seo";
+import LessonReferences from "@/components/LessonReferences";
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -36,6 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.excerpt,
       publishedTime: post.publishedAt,
+      ...(post.updatedAt ? { modifiedTime: post.updatedAt } : {}),
       authors: [post.author],
       siteName: site.name,
       locale: "en_IN",
@@ -54,7 +61,7 @@ export default async function LessonPage({ params }: Props) {
   const { slug } = await params;
   const post = getLesson(slug);
   if (!post) notFound();
-  const related = getLessons()
+  const related = getPublishedLessons()
     .filter((item) => item.slug !== slug)
     .sort(
       (a, b) =>
@@ -97,6 +104,19 @@ export default async function LessonPage({ params }: Props) {
                   Estimated archive date
                 </span>
               )}
+              {post.updatedAt && (
+                <span>
+                  Updated{" "}
+                  <time dateTime={post.updatedAt}>
+                    {new Date(post.updatedAt).toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                      timeZone: "Asia/Kolkata",
+                    })}
+                  </time>
+                </span>
+              )}
             </div>
           </header>
           <ReadingControls />
@@ -107,15 +127,26 @@ export default async function LessonPage({ params }: Props) {
             </p>
           )}
           {post.image && (
-            <img
-              className="article-image"
-              src={post.image}
-              alt={post.imageAlt || post.title}
-              width="960"
-              height="720"
-            />
+            <figure className="source-card">
+              <img
+                className="article-image"
+                src={post.image}
+                alt={post.imageAlt || post.title}
+                width="960"
+                height="720"
+              />
+              {!post.sample && (
+                <figcaption>
+                  Original classroom card. The reading notes and practice below
+                  may expand on the card or use revised examples. Historical
+                  examples are language exercises, not current news or medical
+                  guidance.
+                </figcaption>
+              )}
+            </figure>
           )}
           <LessonBody content={post.content} />
+          {!post.sample && <LessonReferences title={post.title} />}
           <LessonPractice
             slug={post.slug}
             recall={recallFromLesson(post.content)}
@@ -167,6 +198,7 @@ export default async function LessonPage({ params }: Props) {
             headline: post.title,
             description: post.excerpt,
             datePublished: post.publishedAt,
+            ...(post.updatedAt ? { dateModified: post.updatedAt } : {}),
             mainEntityOfPage: absolute(`/blog/${post.slug}/`),
             url: absolute(`/blog/${post.slug}/`),
             author: {

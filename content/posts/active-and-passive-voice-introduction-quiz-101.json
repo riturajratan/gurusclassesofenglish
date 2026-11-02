@@ -1,7 +1,7 @@
 {
   "slug": "active-and-passive-voice-introduction-quiz-101",
   "title": "Active and Passive Voice: Introduction — Quiz 101",
-  "content": "## Active and Passive Voice: Introduction\n\nLearn how active and passive voice change the focus of a sentence.\n\n### Lesson focus\n\n1. Active voice: People speak English all over the world.\n2. Passive voice: English is spoken all over the world.\n\n### Practise with the image\n\nRead the full lesson image for the original exercise, notes and any answer key shown. Write your own answers before checking a key. A key labelled for another quiz belongs to that quiz.",
+  "content": "## Active and Passive Voice: Introduction\n\nLearn how active and passive voice change the focus of a sentence.\n\n### Lesson focus\n\n1. Active voice: People speak English all over the world.\n2. Passive voice: English is spoken all over the world.\n\n### Understand the pattern\n\nActive voice normally puts the doer before the verb. Passive voice puts the receiver of the action first and uses a form of be plus a past participle. The tense and the central meaning stay the same; the focus changes.\n\n### Worked answers and explanation\n\nPeople speak English all over the world → English is spoken all over the world. English becomes the subject. Is agrees with the uncountable noun English; spoken is the past participle of speak. The agent people is unnecessary here.\n\n### Try another\n\nChange: The librarian checks the books every Friday.\n\n### Suggested answer\n\nThe books are checked by the librarian every Friday. Books is plural, so the passive uses are checked, not is checked.",
   "category": "Quiz",
   "excerpt": "Learn how active and passive voice change the focus of a sentence.",
   "tags": [
@@ -17,5 +17,6 @@
   "publishedAt": "2026-05-09T05:16:40Z",
   "sample": false,
   "dateEstimated": true,
-  "image": "/images/lessons/active-and-passive-voice-introduction-quiz-101.webp"
+  "image": "/images/lessons/active-and-passive-voice-introduction-quiz-101.webp",
+  "updatedAt": "2026-11-02T06:06:42.000Z"
 }
