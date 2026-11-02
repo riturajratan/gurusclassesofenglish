@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { Facebook, Mail, Phone } from "lucide-react";
+import GooglePrivacyButton from "./GooglePrivacyButton";
 export default function Footer() {
   return (
     <footer className="site-footer">
@@ -38,6 +39,7 @@ export default function Footer() {
             <Link href="/about/">Meet your teacher ↗</Link>
             <Link href="/contact/">Say hello ↗</Link>
             <Link href="/privacy/">Privacy &amp; cookies ↗</Link>
+            <GooglePrivacyButton />
           </div>
         </div>
         <div className="footer-bottom">

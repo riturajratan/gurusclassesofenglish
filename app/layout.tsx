@@ -7,6 +7,7 @@ import ServiceWorker from "@/components/ServiceWorker";
 import Analytics from "@/components/Analytics";
 import { absolute, jsonLd, site } from "@/lib/site";
 import { siteDescription, siteTitle } from "@/lib/seo";
+import { adPublisher } from "@/lib/advertising";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -30,8 +31,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
   verification: { google: site.googleVerification },
-  // Ownership verification only; this does not load Google's advertising tag.
-  other: { "google-adsense-account": "ca-pub-8791576499923818" },
+  other: { "google-adsense-account": adPublisher },
 };
 export const viewport: Viewport = {
   themeColor: "#172e2a",

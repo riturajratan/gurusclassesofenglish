@@ -18,6 +18,8 @@ import LessonPractice from "@/components/LessonPractice";
 import { recallFromLesson } from "@/lib/learning";
 import { lessonBreadcrumbs } from "@/lib/seo";
 import LessonReferences from "@/components/LessonReferences";
+import LessonAd from "@/components/LessonAd";
+import { hasLessonAd } from "@/lib/advertising";
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -174,6 +176,7 @@ export default async function LessonPage({ params }: Props) {
             </Link>
           </aside>
         </article>
+        {hasLessonAd(post) && <LessonAd key={post.slug} />}
         <section className="section">
           <div className="section-heading">
             <div>

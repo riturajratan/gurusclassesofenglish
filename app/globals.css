@@ -1521,3 +1521,49 @@ img {
 .lesson-references { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 40px; font-size: 16px; line-height: 1.8; }
 .lesson-references h2 { font-family: var(--serif); font-size: 26px; }
 .lesson-references a { text-decoration: underline; text-underline-offset: 3px; }
+/* A single quiet advertising break after the complete lesson. */
+.lesson-ad {
+  width: 100%;
+  max-width: 728px;
+  min-height: 160px;
+  margin: 56px auto;
+  padding: 15px 0 18px;
+  border-top: 1px solid var(--line, #dcded5);
+  border-bottom: 1px solid var(--line, #dcded5);
+}
+.lesson-ad[hidden] { display: none; }
+.lesson-ad-label {
+  display: block;
+  text-align: center;
+  margin-bottom: 12px;
+  font: 10px/1.5 var(--font-body, Arial, sans-serif);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted, #65736b);
+}
+.lesson-ad-preview {
+  display: grid;
+  place-items: center;
+  height: 100px;
+  padding: 10px;
+  text-align: center;
+  border: 1px dashed var(--line, #dcded5);
+  color: var(--muted, #65736b);
+  background: var(--paper, #faf9f2);
+  font-size: 13px;
+}
+.google-privacy-choice {
+  display: block;
+  margin-top: 14px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+@media (max-width: 600px) { .lesson-ad { margin-block: 40px; } }
+@media print { .lesson-ad, .google-privacy-choice { display: none !important; } }

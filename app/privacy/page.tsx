@@ -2,10 +2,11 @@ import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 import AnalyticsPreferences from "@/components/AnalyticsPreferences";
+import AdvertisingPreferences from "@/components/AdvertisingPreferences";
 
 export const metadata = pageMetadata(
   "Privacy & cookies",
-  "How Gurus Classes of English uses optional analytics, cookies, local practice storage and contact information. Manage your analytics choice.",
+  "How Gurus Classes of English uses analytics, advertising, cookies and local practice storage. Manage your analytics and advertising choices.",
   "/privacy/",
 );
 
@@ -133,15 +134,40 @@ export default function Privacy() {
         </p>
         <h2>Advertising</h2>
         <p>
-          Google AdSense advertising is not currently enabled on this site. If
-          advertising is introduced, we will update this page to describe the
-          providers and choices before enabling it. Advertising services may
-          place or read cookies or use web beacons, IP addresses and other
-          identifiers to deliver and measure ads. Any advertising consent
-          controls required for the audience and regions served will need to be
-          configured separately; the analytics choice above is for analytics
-          only.
+          Google AdSense supports this notebook through a clearly labelled
+          advertising space after eligible published lessons. Ad display depends
+          on Google approval, your privacy choices and available advertising.
+          The ad is separate from lesson practice, teacher contact links and
+          navigation. Sample lessons and the teacher’s desk do not contain ads.
         </p>
+        <p>
+          Google and its advertising partners may place or read cookies, use web
+          beacons, local storage, IP addresses and device identifiers to
+          deliver, measure and personalise ads, prevent fraud and limit repeat
+          advertising. Requests can include the page address, referrer and
+          browser or device information. Google may process information outside
+          your country. See the Google partner-site information and Privacy
+          Policy linked above, and{" "}
+          <a
+            href="https://myadcenter.google.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Google’s advertising controls
+          </a>
+          .
+        </p>
+        <p>
+          Google’s consent message is configured for visitors in the European
+          Economic Area, the UK and Switzerland, with consent, do-not-consent
+          and manage-options choices. Where it applies, use Google privacy
+          choices in the footer or below to revisit consent and review listed
+          partners and purposes. Non-personalised or limited ads may still be
+          possible under Google’s settings. To stop this site requesting ads in
+          this browser, choose Read without ads below. Analytics permission is
+          separate and does not grant advertising consent.
+        </p>
+        <AdvertisingPreferences />
         <h2>Young learners</h2>
         <p>
           Children can use the public learning material without creating an

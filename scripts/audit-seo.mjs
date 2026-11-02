@@ -18,6 +18,11 @@ const meta = (html, name) => {
 const canonical = (html) =>
   html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
 const sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
+assert.equal(
+  fs.readFileSync(path.join(root, "ads.txt"), "utf8").trim(),
+  "google.com, pub-8791576499923818, DIRECT, f08c47fec0942fa0",
+  "Incorrect ads.txt publisher",
+);
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
   (match) => match[1],
 );
@@ -113,6 +118,14 @@ for (const address of urls) {
   }
 }
 for (const lesson of published) {
+  const lessonHtml = read(`/blog/${lesson.slug}/`);
+  const eligibleForAd =
+    (lesson.content.trim().match(/\S+/g) || []).length >= 100;
+  assert.equal(
+    lessonHtml.includes('data-lesson-ad="true"'),
+    eligibleForAd,
+    `Wrong ad placement eligibility: ${lesson.slug}`,
+  );
   assert.ok(
     !/note for teacher review|teacher should review|review these details before publication|add or confirm the answers before publication/i.test(
       lesson.content,
@@ -157,9 +170,17 @@ for (const entry of fs.readdirSync(path.join(root, "blog"), {
       meta(read(route), "robots")?.includes("noindex"),
       `Orphan indexable lesson: ${address}`,
     );
+    assert.ok(
+      !read(route).includes('data-lesson-ad="true"'),
+      `Ad placement on a sample lesson: ${address}`,
+    );
   }
 }
 for (const route of ["/publish/", "/offline/"]) {
+  assert.ok(
+    !read(route).includes('data-lesson-ad="true"'),
+    `Ad placement on utility page: ${route}`,
+  );
   assert.ok(
     meta(read(route), "robots")?.includes("noindex"),
     `Private/utility route is indexable: ${route}`,
@@ -167,6 +188,19 @@ for (const route of ["/publish/", "/offline/"]) {
   assert.ok(
     !urls.includes(`${origin}${route}`),
     `Private/utility route in sitemap: ${route}`,
+  );
+}
+for (const route of [
+  "/",
+  "/about/",
+  "/contact/",
+  "/privacy/",
+  "/blog/",
+  "/courses/",
+]) {
+  assert.ok(
+    !read(route).includes('data-lesson-ad="true"'),
+    `Ad placement outside published lessons: ${route}`,
   );
 }
 assert.ok(
