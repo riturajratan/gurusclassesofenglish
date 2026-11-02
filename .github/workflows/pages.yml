@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "22"
           cache: npm
       - run: npm ci
       - run: npm run test:worker
@@ -26,6 +26,8 @@ jobs:
           NEXT_PUBLIC_SITE_URL: https://gurusclassesofenglish.com
           NEXT_PUBLIC_PUBLISHER_URL: ${{ vars.NEXT_PUBLIC_PUBLISHER_URL || 'https://gurus-notebook-publisher.riturajratan.workers.dev' }}
           NEXT_PUBLIC_GOOGLE_VERIFICATION: ${{ vars.NEXT_PUBLIC_GOOGLE_VERIFICATION }}
+          NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
+      - run: npm run test:seo
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

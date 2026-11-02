@@ -1,17 +1,29 @@
-'use client';
-import { useState } from 'react';
-import { Facebook } from 'lucide-react';
-export default function ShareLesson({ title, url }: { title: string; url: string }) {
+"use client";
+import { useState } from "react";
+import { Facebook } from "lucide-react";
+import { trackEvent } from "./Analytics";
+export default function ShareLesson({
+  title,
+  url,
+}: {
+  title: string;
+  url: string;
+}) {
   const [copied, setCopied] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   async function copy() {
     try {
       await navigator.clipboard.writeText(url);
+      trackEvent("share", {
+        method: "copy_link",
+        content_type: "lesson",
+        item_id: new URL(url).pathname,
+      });
       setCopied(true);
-      setError('');
+      setError("");
       setTimeout(() => setCopied(false), 2500);
     } catch {
-      setError('Copy the address from your browser to share this lesson.');
+      setError("Copy the address from your browser to share this lesson.");
     }
   }
   return (
@@ -23,6 +35,13 @@ export default function ShareLesson({ title, url }: { title: string; url: string
           href={`https://wa.me/?text=${encodeURIComponent(`${title}\n${url}`)}`}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() =>
+            trackEvent("share", {
+              method: "whatsapp",
+              content_type: "lesson",
+              item_id: new URL(url).pathname,
+            })
+          }
         >
           Share on WhatsApp ↗
         </a>
@@ -31,19 +50,35 @@ export default function ShareLesson({ title, url }: { title: string; url: string
           href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() =>
+            trackEvent("share", {
+              method: "facebook",
+              content_type: "lesson",
+              item_id: new URL(url).pathname,
+            })
+          }
         >
-          <Facebook size={18} aria-hidden="true" /> Share on Facebook <span aria-hidden="true">↗</span>
+          <Facebook size={18} aria-hidden="true" /> Share on Facebook{" "}
+          <span aria-hidden="true">↗</span>
         </a>
         <a
           className="button button-small button-outline share-twitter"
           href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() =>
+            trackEvent("share", {
+              method: "x",
+              content_type: "lesson",
+              item_id: new URL(url).pathname,
+            })
+          }
         >
-          <span aria-hidden="true">𝕏</span> Share on X (Twitter) <span aria-hidden="true">↗</span>
+          <span aria-hidden="true">𝕏</span> Share on X (Twitter){" "}
+          <span aria-hidden="true">↗</span>
         </a>
         <button className="button button-small button-outline" onClick={copy}>
-          {copied ? 'Link copied ✓' : 'Copy link'}
+          {copied ? "Link copied ✓" : "Copy link"}
         </button>
       </div>
       <p role="status" className="desk-help">

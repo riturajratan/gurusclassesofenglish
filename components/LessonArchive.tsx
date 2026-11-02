@@ -1,37 +1,60 @@
-'use client';
-import { useEffect, useMemo, useState } from 'react';
-import type { Lesson } from '@/lib/lessons';
-import LessonCard from './LessonCard';
-const topics = ['All lessons', 'Quiz', 'Word Power', 'Vocabulary', 'Grammar', 'Common Mistakes', 'Writing', 'Speaking'];
+"use client";
+import { useEffect, useMemo, useState } from "react";
+import type { Lesson } from "@/lib/lessons";
+import LessonCard from "./LessonCard";
+import { trackEvent } from "./Analytics";
+const topics = [
+  "All lessons",
+  "Quiz",
+  "Word Power",
+  "Vocabulary",
+  "Grammar",
+  "Common Mistakes",
+  "Writing",
+  "Speaking",
+];
 export default function LessonArchive({ lessons }: { lessons: Lesson[] }) {
-  const [topic, setTopic] = useState('All lessons');
-  const [search, setSearch] = useState('');
+  const [topic, setTopic] = useState("All lessons");
+  const [search, setSearch] = useState("");
   useEffect(() => {
-    const initial = new URLSearchParams(window.location.search).get('topic');
+    const initial = new URLSearchParams(window.location.search).get("topic");
     if (initial && topics.includes(initial)) setTopic(initial);
   }, []);
   const filtered = useMemo(
     () =>
-      lessons.filter(
-        (item) =>
-          (topic === 'All lessons' || item.category === topic) &&
-          `${item.title} ${item.excerpt} ${item.tags.join(' ')}`
-            .toLowerCase()
-            .includes(search.toLowerCase().trim()),
-      ).sort((a, b) => {
-        if ((topic === 'Quiz' || topic === 'Word Power') && a.seriesNumber !== undefined && b.seriesNumber !== undefined) {
-          return b.seriesNumber - a.seriesNumber || (b.seriesPart || '').localeCompare(a.seriesPart || '');
-        }
-        return Date.parse(b.publishedAt) - Date.parse(a.publishedAt);
-      }),
+      lessons
+        .filter(
+          (item) =>
+            (topic === "All lessons" || item.category === topic) &&
+            `${item.title} ${item.excerpt} ${item.tags.join(" ")}`
+              .toLowerCase()
+              .includes(search.toLowerCase().trim()),
+        )
+        .sort((a, b) => {
+          if (
+            (topic === "Quiz" || topic === "Word Power") &&
+            a.seriesNumber !== undefined &&
+            b.seriesNumber !== undefined
+          ) {
+            return (
+              b.seriesNumber - a.seriesNumber ||
+              (b.seriesPart || "").localeCompare(a.seriesPart || "")
+            );
+          }
+          return Date.parse(b.publishedAt) - Date.parse(a.publishedAt);
+        }),
     [lessons, topic, search],
   );
   function choose(value: string) {
     setTopic(value);
+    trackEvent("select_content", {
+      content_type: "lesson_topic",
+      item_id: value,
+    });
     const url = new URL(window.location.href);
-    if (value === 'All lessons') url.searchParams.delete('topic');
-    else url.searchParams.set('topic', value);
-    window.history.replaceState(null, '', url);
+    if (value === "All lessons") url.searchParams.delete("topic");
+    else url.searchParams.set("topic", value);
+    window.history.replaceState(null, "", url);
   }
   return (
     <>
@@ -59,7 +82,8 @@ export default function LessonArchive({ lessons }: { lessons: Lesson[] }) {
         ))}
       </div>
       <p className="results-count" aria-live="polite">
-        {filtered.length} {filtered.length === 1 ? 'lesson' : 'lessons'} to explore
+        {filtered.length} {filtered.length === 1 ? "lesson" : "lessons"} to
+        explore
       </p>
       {filtered.length ? (
         <div className="lesson-grid archive-grid">
@@ -74,8 +98,8 @@ export default function LessonArchive({ lessons }: { lessons: Lesson[] }) {
           <button
             className="button"
             onClick={() => {
-              setSearch('');
-              choose('All lessons');
+              setSearch("");
+              choose("All lessons");
             }}
           >
             Show all lessons
